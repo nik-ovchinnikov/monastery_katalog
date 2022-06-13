@@ -1,0 +1,69 @@
+<div class="cont1">
+  <h3 class="text-center"> Список Частиц Святых Мощей</h3>
+
+  <div class='cont2 text-center'>
+    <div>
+      <a routerLink="/place/delete/after-submit">
+        <button (click)="submitDelete()" class="btn btn-danger">Подтвердить удаления</button>
+      </a>
+    </div>
+    <div>
+      <button (click)="cancelDeletes()" class="btn btn-warning">Отменить удаления</button>
+    </div>
+  </div>
+
+  <table class="table table-dark table-striped table-hover">
+      <thead>
+          <tr>
+              <th>№</th>
+              <th>Название</th>
+              <th>Ключ</th>
+              <th>Описание</th>
+              <th>Дата создания</th>
+              <th>Дата последнего изменения</th>
+              <th>Тип - Подтип</th>
+              <th>Место - Подраздел</th>
+              <th>Изображения</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of itemsToShow
+            | iconFilter:filterData
+            ; let i = index">
+              <td>{{ i + 1}}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.key }}</td>
+              <td>{{ item.description}}</td>
+              <td>{{ item.creationDate | date: 'dd MMM yyyy H:mm:ss'}}</td>
+              <td>{{ item.lastChangeDate | date: 'dd MMM yyyy H:mm:ss'}}</td>
+              <td>
+                <div>{{ item.type.name }}</div>
+                <div>{{ item.subType.name }}</div>
+              </td>
+              <td>
+                <div>{{ item.place.name }}</div>
+                <div>{{ item.subPlace.name }}</div>
+              </td>
+              <td>
+                 <img *ngIf="item.pictureList[0]"
+                  src="{{'./pictures/relics/' + item.pictureList[0].name }}"
+                  (click)="showCarousel(item.key)"
+                 >
+                 <div *ngIf="!item.pictureList[0]">Нет картинки</div>
+              </td>
+              <td><button (click)="onDeleteBtnClick($event)" class="btn btn-danger" [id]="item.key">X</button></td>
+          </tr>
+      </tbody>
+  </table>
+
+  <app-relic-list-filter
+    (onFormValueChanges) = "onFilterValueChanged($event)"
+  ></app-relic-list-filter>
+
+  <app-carousel *ngIf="showCarouselFlag"
+    [sources]="sourceList"
+    (closeCarousel)="afterCloseCarousel()"
+  ></app-carousel>
+
+</div>

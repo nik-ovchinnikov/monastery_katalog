@@ -1,0 +1,65 @@
+<div class="cont1">
+  <h3 class="text-center"> Список книг</h3>
+  <table class="table table-dark table-striped table-hover">
+      <thead>
+          <tr>
+              <th>№</th>
+              <th>Ключ / Автор / <br> Название</th>
+              <th>Описание</th>
+              <th>Дата последнего <br> изменения / создания</th>
+              <th>Тип - <br> Подтип</th>
+              <th>Место - <br> Подраздел</th>
+              <th>Изображения</th>
+              <th>Год / Издатель /<br> Серия</th>
+              <th>Вес / <br> Габариты </th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of booksToShow
+            | bookFilter:filterData
+            ; let i = index">
+              <td>{{ i + 1}}</td>
+              <td>{{ item.key }}/ {{ item.author }} /<br> {{ item.name }}</td>
+              <td>{{ item.description}}</td>
+              <td>
+                {{ item.creationDate | date: 'dd MMM yyyy H:mm:ss'}} /<br> 
+                {{ item.lastChangeDate | date: 'dd MMM yyyy H:mm:ss'}}
+              </td>
+              <td>
+                <div>{{ item.type.name }}</div>
+                <div>{{ item.subType.name }}</div>
+              </td>
+              <td>
+                <div>{{ item.place.name }}</div>
+                <div>{{ item.subPlace.name }}</div>
+              </td>
+              <td>
+                 <img *ngIf="item.pictureList[0]"
+                  src="{{'./pictures/books/' + item.pictureList[0].name }}"
+                  (click)="showCarousel(item.key)"
+                 >
+                 <div *ngIf="!item.pictureList[0]">Нет картинки</div>
+              </td>
+              <td>
+                <div>{{ item.publishYear }}</div>
+                <div>{{ item.publisher }}</div>
+                <div>{{ item.seria }}</div>
+              </td>
+              <td>
+                <div>{{ item.weight }}</div>
+                <div>{{ item.size }}</div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+
+  <app-book-list-filter
+    (onFormValueChanges) = "onFilterValueChanged($event)"
+  ></app-book-list-filter>
+
+  <app-carousel *ngIf="showCarouselFlag"
+    [sources]="sourceList"
+    (closeCarousel)="afterCloseCarousel()"
+  ></app-carousel>
+
+</div>

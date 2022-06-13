@@ -1,0 +1,59 @@
+<div class="cont1">
+  <h3 class="text-center"> Список Священных предметов</h3>
+
+
+  <table class="table table-dark table-striped table-hover">
+      <thead>
+          <tr>
+              <th>№</th>
+              <th>Название</th>
+              <th>Ключ</th>
+              <th>Описание</th>
+              <th>Дата создания</th>
+              <th>Дата последнего изменения</th>
+              <th>Тип - Подтип</th>
+              <th>Место - Подраздел</th>
+              <th>Изображения</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of itemsToShow
+            | sacredItemFilter:filterData
+            ; let i = index">
+              <td>{{ i + 1}}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.key }}</td>
+              <td>{{ item.description}}</td>
+              <td>{{ item.creationDate | date: 'dd MMM yyyy H:mm:ss'}}</td>
+              <td>{{ item.lastChangeDate | date: 'dd MMM yyyy H:mm:ss'}}</td>
+              <td>
+                <div>{{ item.type.name }}</div>
+                <div>{{ item.subType.name }}</div>
+              </td>
+              <td>
+                <div>{{ item.place.name }}</div>
+                <div>{{ item.subPlace.name }}</div>
+              </td>
+              <td>
+                 <img *ngIf="item.pictureList[0]"
+                  src="{{'./pictures/sacredItems/' + item.pictureList[0].name }}"
+                  (click)="showCarousel(item.key)"
+                 >
+                 <div *ngIf="!item.pictureList[0]">Нет картинки</div>
+              </td>
+              <td><button (click)="onChangeBtnClick($event)" class="btn btn-success" [id]="item.key">Изменить</button></td>
+          </tr>
+      </tbody>
+  </table>
+
+  <app-sacredItem-list-filter
+    (onFormValueChanges) = "onFilterValueChanged($event)"
+  ></app-sacredItem-list-filter>
+
+  <app-carousel *ngIf="showCarouselFlag"
+    [sources]="sourceList"
+    (closeCarousel)="afterCloseCarousel()"
+  ></app-carousel>
+
+</div>
