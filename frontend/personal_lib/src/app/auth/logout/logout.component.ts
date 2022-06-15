@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public http: HttpClient,
+  ) {
+    
+   }
 
   ngOnInit(): void {
+    this.http.get('/logout').subscribe((data) => {console.log(data)});
   }
 
 }

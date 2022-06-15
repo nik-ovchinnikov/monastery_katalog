@@ -76,6 +76,7 @@ export class CrudService {
     }
 
     public deleteOldPicturesByIds(idArray: number[]) {
+        console.log(idArray);
        return this.http.post(this.urlParam + '/deleteOldPictures', idArray);
     }
 

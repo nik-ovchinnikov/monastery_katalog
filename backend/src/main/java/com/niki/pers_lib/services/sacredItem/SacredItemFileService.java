@@ -1,7 +1,9 @@
 package com.niki.pers_lib.services.sacredItem;
 
 import com.niki.pers_lib.DAO.churchItem.IChurchItemPictureDao;
+import com.niki.pers_lib.DAO.sacredItem.ISacredItemPictureDao;
 import com.niki.pers_lib.entities.churchItem.ChurchItemPicture;
+import com.niki.pers_lib.entities.sacredItem.SacredItemPicture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,11 +17,11 @@ import java.util.List;
 public class SacredItemFileService {
 
     @Autowired
-    private IChurchItemPictureDao churchItemPictureDao;
+    private ISacredItemPictureDao sacredItemPictureDao;
 
 //    private String storageRoot = "E:\\Workspace\\personal_lib\\backend\\src\\main\\resources\\pictures\\books\\";
-    private String storageRoot = "/app/src/main/resources/static/pictures/churchItems/";
-    private String storageRoot2 = "/app/target/classes/static/pictures/churchItems/";
+    private String storageRoot = "/app/src/main/resources/static/pictures/sacredItems/";
+    private String storageRoot2 = "/app/target/classes/static/pictures/sacredItems/";
 
     public void fileUpload(MultipartFile file, String fileName) throws IOException {
 
@@ -35,7 +37,7 @@ public class SacredItemFileService {
         System.out.println("ID spisok");
         System.out.println(idsArray);
         for(Long id : idsArray) {
-            ChurchItemPicture picture = churchItemPictureDao.getById(id);
+            SacredItemPicture picture = sacredItemPictureDao.getById(id);
             File file = new File(storageRoot + picture.getName());
             file.delete();
             File file2 = new File(storageRoot2 + picture.getName());

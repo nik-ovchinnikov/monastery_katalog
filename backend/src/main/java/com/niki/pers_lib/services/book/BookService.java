@@ -13,8 +13,6 @@ import com.niki.pers_lib.entities.book.book_place.BookSubPlace;
 import com.niki.pers_lib.entities.book.book_type.BookSubType;
 import com.niki.pers_lib.entities.book.book_type.BookType;
 import com.niki.pers_lib.services.book.book_place.BookPlaceService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

@@ -4,8 +4,6 @@ import com.niki.pers_lib.DAO.book.book_type.IBookSubTypeDAO;
 import com.niki.pers_lib.DAO.book.book_type.IBookTypeDAO;
 import com.niki.pers_lib.entities.book.book_type.BookSubType;
 import com.niki.pers_lib.entities.book.book_type.BookType;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

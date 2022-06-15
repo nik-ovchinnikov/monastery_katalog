@@ -12,17 +12,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
+//
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-//            .authorizeRequests()
-//                .antMatchers("/book-place/update").permitAll()
-//            .anyRequest()
-//            .authenticated()
-//            .and()
-//            .httpBasic()
+                .csrf().disable()
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
         ;
     }
 
